@@ -5,6 +5,8 @@ SELECT
 FROM
     Activity
 WHERE
-    activity_date <= "2019-07-27" AND activity_date > DATE_SUB("2019-07-27", INTERVAL 30 DAY)
+    DATEDIFF( "2019-07-27", activity_date ) < 30 AND DATEDIFF( "2019-07-27", activity_date ) >= 0
 GROUP BY
     activity_date
+HAVING
+    COUNT( DISTINCT user_id) > 0

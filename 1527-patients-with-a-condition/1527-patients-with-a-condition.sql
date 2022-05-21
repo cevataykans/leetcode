@@ -6,4 +6,4 @@ SELECT
 FROM
     Patients
 WHERE
-    INSTR( conditions, ' DIAB1') > 0 OR INSTR( conditions, 'DIAB1') = 1
+    conditions LIKE '% DIAB1%' OR conditions LIKE 'DIAB1%'

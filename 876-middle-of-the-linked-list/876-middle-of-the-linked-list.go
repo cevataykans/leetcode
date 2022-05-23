@@ -7,14 +7,13 @@
  */
 func middleNode(head *ListNode) *ListNode {
     
-    nodeList := make( []*ListNode, 0)
+    slow, fast := head, head
     
-    curPtr := head
-    for curPtr != nil {
+    for fast != nil && fast.Next != nil {
         
-        nodeList = append( nodeList, curPtr)
-        curPtr = curPtr.Next
+        fast = fast.Next.Next
+        slow = slow.Next
     }
     
-    return nodeList[ len( nodeList) / 2]
+    return slow
 }

@@ -1,36 +1,26 @@
 func merge(nums1 []int, m int, nums2 []int, n int)  {
     
-    tempList := make( []int, m + n)
-
-    i, j, curI := 0, 0, 0
-    for i < m && j < n {
+    i, j, curI := m - 1, n - 1, m + n - 1
+    for i >= 0 && j >= 0 {
         
-        if nums1[ i] > nums2[ j] {
+        if nums1[ i] < nums2[ j] {
             
-            tempList[ curI] = nums2[ j]
-            j++
+            nums1[ curI] = nums2[ j]
+            j--
             
         } else {
             
-            tempList[ curI] = nums1[ i]
-            i++
+            nums1[ curI] = nums1[ i]
+            i--
         }
-        curI++
+        curI--
     }
     
-    for i < m {
+    for j >= 0 {
         
-        tempList[ curI] = nums1[ i]
-        i++
-        curI++
+        nums1[ curI] = nums2[ j]
+        j--
+        curI--
     }
     
-    for j < n {
-        
-        tempList[ curI] = nums2[ j]
-        j++
-        curI++
-    }
-    
-    copy( nums1, tempList)
 }

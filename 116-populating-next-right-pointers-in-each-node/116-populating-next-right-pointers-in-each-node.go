@@ -14,22 +14,20 @@ func connect(root *Node) *Node {
     return root
 }
 
-func traverse( cur *Node, parent *Node) {
+func traverse( cur *Node, next *Node) {
     
     if cur == nil {
         
         return
     }
     
-    if cur.Left != nil {
-        
-        cur.Left.Next = cur.Right
-    }
+    cur.Next = next
     
-    if parent != nil && cur == parent.Right && parent.Next != nil {
-        
-        cur.Next = parent.Next.Left
+
+    traverse( cur.Left, cur.Right)
+    if cur.Next != nil {
+        traverse( cur.Right, cur.Next.Left)
+    } else {
+        traverse( cur.Right, nil)   
     }
-    traverse( cur.Left, cur)
-    traverse( cur.Right, cur)
 }

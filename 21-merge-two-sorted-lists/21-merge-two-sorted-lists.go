@@ -7,67 +7,23 @@
  */
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
     
-    if list1 == nil && list2 == nil {
+    if list1 == nil {
         
-        return nil
+        return list2
     }
     
-    var merged *ListNode = nil
-    var toReturn *ListNode = nil
-    for list1 != nil && list2 != nil {
+    if list2 == nil {
         
-        if merged == nil {
-            
-            merged = new( ListNode)
-            toReturn = merged
-        } else {
-            
-            merged.Next = new( ListNode)
-            merged = merged.Next   
-        }
-        
-        if list1.Val > list2.Val {
-            
-            merged.Val = list2.Val
-            list2 = list2.Next
-        } else {
-            
-            merged.Val = list1.Val
-            list1 = list1.Next
-        }
+        return list1
     }
     
-    for list1 != nil {
+    if list1.Val < list2.Val {
         
-        if merged == nil {
-            
-            merged = new( ListNode)
-            toReturn = merged
-        } else {
-            
-            merged.Next = new( ListNode)
-            merged = merged.Next   
-        }
+        list1.Next = mergeTwoLists( list1.Next, list2)
+        return list1
+    } else {
         
-        merged.Val = list1.Val
-        list1 = list1.Next
+        list2.Next = mergeTwoLists( list1, list2.Next)
+        return list2
     }
-    
-    for list2 != nil {
-        
-        if merged == nil {
-            
-            merged = new( ListNode)
-            toReturn = merged
-        } else {
-            
-            merged.Next = new( ListNode)
-            merged = merged.Next   
-        }
-        
-        merged.Val = list2.Val
-        list2 = list2.Next
-    }
-    
-    return toReturn
 }

@@ -7,16 +7,21 @@
  */
 func hasCycle(head *ListNode) bool {
     
-    set := make( map[*ListNode]bool)
-    
-    for head != nil {
+    if head == nil {
         
-        if set[ head] {
+        return false
+    }
+    
+    slow, fast := head, head.Next
+    for fast != nil && fast.Next != nil {
+        
+        if slow == fast {
             
             return true
         }
-        set[ head] = true
-        head = head.Next
+        
+        slow = slow.Next
+        fast = fast.Next.Next
     }
     return false
 }

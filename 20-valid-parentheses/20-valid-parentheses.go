@@ -1,10 +1,16 @@
 func isValid(s string) bool {
     
     stack := []rune{}
+    match := map[rune]rune{
+        '}' : '{',
+        ']' : '[',
+        ')' : '(',
+    }
     
     for _, char := range s {
         
-        if char == '}' || char == ']' || char == ')' {
+        val, ok := match[ char]
+        if ok {
             
             if len( stack) == 0 {
                 
@@ -12,7 +18,7 @@ func isValid(s string) bool {
             }
             
             lastChar := stack[ len( stack) - 1]
-            if char == ']' && lastChar != '[' || char == '}' && lastChar != '{' || char == ')' && lastChar != '(' {
+            if val != lastChar {
                 
                 return false
             } 

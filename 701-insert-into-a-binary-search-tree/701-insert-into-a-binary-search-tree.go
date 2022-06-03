@@ -14,35 +14,34 @@ func insertIntoBST(root *TreeNode, val int) *TreeNode {
         return root
     }
     
-    if root.Val < val {
-        
-        inserIntoBSTHelper( root, root.Right, val)
-    } else {
-        inserIntoBSTHelper( root, root.Left, val)   
-    }
+    inserIntoBSTHelper( root, val)
     return root
 }
 
-func inserIntoBSTHelper( prev *TreeNode, cur *TreeNode, val int) {
-    
-    if cur == nil {
-        
-        if prev.Val >= val {
-            
-            prev.Left = new(TreeNode)
-            prev.Left.Val = val
-        } else {
-            
-            prev.Right = new( TreeNode)
-            prev.Right.Val = val
-        }
-        return
-    }
+func inserIntoBSTHelper( cur *TreeNode, val int) {
     
     if cur.Val < val {
         
-        inserIntoBSTHelper( cur, cur.Right, val)
+        if cur.Right != nil {
+            
+            inserIntoBSTHelper( cur.Right, val)
+            
+        } else {
+            
+            cur.Right = new(TreeNode)
+            cur.Right.Val = val
+        }
+        
     } else {
-        inserIntoBSTHelper( cur, cur.Left, val)   
+        
+        if cur.Left != nil {
+            
+            inserIntoBSTHelper( cur.Left, val)
+            
+        } else {
+            
+            cur.Left = new( TreeNode)
+            cur.Left.Val = val
+        }
     }
 }

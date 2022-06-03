@@ -11,9 +11,7 @@ func isMonotonic(nums []int) bool {
         if nums[ i] > nums[ i - 1] {
             
             isGreat = true
-        }
-        
-        if nums[ i] < nums[ i - 1] {
+        } else if nums[ i] < nums[ i - 1] {
             
             isLow = true
         }

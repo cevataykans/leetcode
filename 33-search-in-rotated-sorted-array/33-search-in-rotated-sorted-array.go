@@ -10,7 +10,7 @@ func search(nums []int, target int) int {
         }
         
         var comparator int
-        if target < nums[ 0] && nums[ middle] < nums[ 0] || target >= nums[ 0] && nums[ middle] >= nums[ 0] {
+        if (target >= nums[0]) == (nums[middle] >= nums[0]) {
             
             comparator = nums[ middle]
             

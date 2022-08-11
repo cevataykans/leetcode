@@ -1,18 +1,24 @@
 func canConstruct(ransomNote string, magazine string) bool {
  
-    charMap := make( map[rune]int )
-    for _, ch := range magazine {
-        
-        charMap[ ch]++
-    }
+    ransomLetters := make( map[rune]int)
+    magLetters := make( map[rune]int)
     
-    for _, ch := range ransomNote {
+    countLetters( ransomNote, ransomLetters)
+    countLetters( magazine, magLetters)
+    
+    for key, count := range ransomLetters {
         
-        charMap[ ch]--
-        if charMap[ ch] < 0 {
-            
+        if magCount, ok := magLetters[ key]; !ok || magCount < count {
             return false
         }
     }
     return true
+}
+
+func countLetters( str string, strLetters map[rune]int) {
+    
+    for _, char := range str {
+        
+        strLetters[char]++
+    }
 }

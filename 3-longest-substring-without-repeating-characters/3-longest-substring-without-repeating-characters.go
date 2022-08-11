@@ -1,36 +1,27 @@
 func lengthOfLongestSubstring(s string) int {
     
-    if len(s) == 0 || len( s) == 1 {
+    head := 0
+    tail := 0
+    maxLength := 0
+    counts := make(map[rune]int)
+    for head < len(s) {
         
-        return len( s)
-    }
-    
-    charSet := make( map[byte]bool)
-    startI, endI := 0, 0
-    maxLength := -1
-    
-    for endI < len( s) {
-        
-        if charSet[ s[ endI]] {
+        curRune := rune(s[head])
+        if counts[ curRune] > 0 {
             
-            for s[ startI] != s[ endI] {
-                
-                delete( charSet, s[ startI])
-                startI++
-            }
-            
-            startI++
+            tailRune := rune(s[tail])
+            counts[ tailRune]--
+            tail++
             
         } else {
             
-            charSet[ s[ endI]] = true
+            counts[ curRune]++
+            head++
         }
         
-        if len( charSet) > maxLength {
-            
-            maxLength = len( charSet)
+        if head - tail > maxLength {
+            maxLength = head - tail
         }
-        endI++
     }
     return maxLength
 }
